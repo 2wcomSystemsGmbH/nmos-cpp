@@ -17,6 +17,9 @@ endif()
 # enable C++
 enable_language(CXX)
 # check C++11 or higher
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 17)
+endif()
 if(CMAKE_CXX_STANDARD STREQUAL "98")
     message(FATAL_ERROR "CMAKE_CXX_STANDARD must be 11 or higher; C++98 is not supported")
 endif()
@@ -37,6 +40,7 @@ endif()
 # location of additional CMake modules
 list(APPEND CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/third_party/cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ARM
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake
     )
 

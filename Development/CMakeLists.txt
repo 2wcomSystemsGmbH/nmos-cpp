@@ -12,10 +12,10 @@ endif()
 project(nmos-cpp)
 
 # enable or disable the example applications
-set(NMOS_CPP_BUILD_EXAMPLES ON CACHE BOOL "Build example applications")
+set(NMOS_CPP_BUILD_EXAMPLES OFF CACHE BOOL "Build example applications")
 
 # enable or disable the unit test suite
-set(NMOS_CPP_BUILD_TESTS ON CACHE BOOL "Build test suite application")
+set(NMOS_CPP_BUILD_TESTS OFF CACHE BOOL "Build test suite application")
 
 # enable or disable the LLDP support library (lldp)
 # and its additional dependencies
