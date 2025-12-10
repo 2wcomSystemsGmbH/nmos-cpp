@@ -40,9 +40,19 @@ endif()
 # location of additional CMake modules
 list(APPEND CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/third_party/cmake
+)
+if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
+list(APPEND CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ARM
+)
+else()
+list(APPEND CMAKE_MODULE_PATH
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MoIN
+)
+endif()
+list(APPEND CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake
-    )
+)
 
 # guard against in-source builds and bad build-type strings
 include(safeguards)
