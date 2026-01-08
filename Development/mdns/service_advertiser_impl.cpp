@@ -471,7 +471,7 @@ namespace mdns
                             break;
                         }
                     }
-                     if (nullptr == pContext)
+                    if (nullptr == pContext)
                     {
                         pContext = new mdns_details::register_address_context(gate);
                         if (nullptr == pContext)
@@ -491,6 +491,7 @@ namespace mdns
                         if (nullptr == pContext->client)
                         {
                             slog::log<slog::severities::error>(gate, SLOG_FLF) << "avahi_client_new error: " << avahi_strerror(error);
+                            return false;
                         }
                         avahi_threaded_poll_start(pContext->threaded_poll);
                     }
@@ -506,7 +507,7 @@ namespace mdns
                         const char *version, *hn;
                         if (!(version = avahi_client_get_version_string(pContext->client)))
                         {
-                            slog::log<slog::severities::error>(gate, SLOG_FLF) << "avahi_client_get_version_string error: " << avahi_strerror(avahi_client_errno(pContext->client));
+                        	slog::log<slog::severities::error>(gate, SLOG_FLF) << "avahi_client_get_version_string error: " << avahi_strerror(avahi_client_errno(pContext->client));
                         }
                         if (!(hn = avahi_client_get_host_name_fqdn(pContext->client)))
                         {
