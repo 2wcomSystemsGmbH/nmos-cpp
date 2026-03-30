@@ -6,6 +6,11 @@
 #include "bst/shared_mutex.h" // for bst::nano
 #include "slog/all_in_one.h" // for bst::chrono
 
+#ifdef USE_EXTERNAL_TAI_OFFSET
+// Funktion existiert im Hauptprogramm
+extern "C" int externTaiOffset();
+#endif
+
 namespace nmos
 {
     // TAI timestamps are used to construct version field values (<seconds>:<nanoseconds>)
@@ -47,7 +52,11 @@ namespace nmos
         static const bool is_steady = bst::chrono::system_clock::is_steady;
 
         // UTC is 37 seconds behind TAI; see comments below for details
+#ifdef USE_EXTERNAL_TAI_OFFSET
+        static const duration tai_offset() { return bst::chrono::seconds(externTaiOffset()); }
+#else
         static const duration tai_offset() { return bst::chrono::seconds(37); }
+#endif
 
         static time_point now()
         {
